@@ -110,6 +110,12 @@ fixtures = [
         "filters": [
             ["module", "in", ["Rov"]]
         ]
+    },
+    {
+        "dt": "Property Setter",
+        "filters": [
+            ["module", "in", ["Rov"]]
+        ]
     }
 ]
 

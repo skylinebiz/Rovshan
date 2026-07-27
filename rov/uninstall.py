@@ -4,6 +4,7 @@ import frappe
 def before_uninstall():
     module = "Rov"
 
+    # Delete custom fields and their property setters
     custom_fields = frappe.get_all(
         "Custom Field",
         filters={"module": module},
@@ -15,6 +16,20 @@ def before_uninstall():
         frappe.delete_doc(
             "Custom Field",
             cf.name,
+            ignore_permissions=True,
+            force=True,
+        )
+
+    property_setters = frappe.get_all(
+        "Property Setter",
+        filters={"module": module},
+        pluck="name",
+    )
+
+    for ps in property_setters:
+        frappe.delete_doc(
+            "Property Setter",
+            ps,
             ignore_permissions=True,
             force=True,
         )
