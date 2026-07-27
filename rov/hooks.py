@@ -1,6 +1,6 @@
 app_name = "rov"
 app_title = "Rov"
-app_publisher = "Harshit"
+app_publisher = "Harshit Jain"
 app_description = "Rovshan"
 app_email = "harshit@skylinebiz.in"
 app_license = "mit"
@@ -8,7 +8,7 @@ app_license = "mit"
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["erpnext"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -91,8 +91,27 @@ app_license = "mit"
 # Uninstallation
 # ------------
 
-# before_uninstall = "rov.uninstall.before_uninstall"
+before_uninstall = "rov.uninstall.before_uninstall"
 # after_uninstall = "rov.uninstall.after_uninstall"
+
+doc_events = {
+    "Customer": {
+        "before_save": "rov.api.customer.before_save"
+    }
+}
+
+doctype_js = {
+    "Sales Invoice": "public/js/invoice.js"
+}
+
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["module", "in", ["Rov"]]
+        ]
+    }
+]
 
 # Integration Setup
 # ------------------
