@@ -5,12 +5,19 @@ frappe.ui.form.on("Payment Entry", {
 
     refresh(frm) {
         set_party_query(frm);
+        toggle_sales_person(frm);
     },
 
     party_type(frm) {
         frm.set_value("party", "");
         frm.set_value("party_name", "");
+
+        if (frm.doc.party_type !== "Customer") {
+            frm.set_value("custom_rov_sales_person", "");
+        }
+
         set_party_query(frm);
+        toggle_sales_person(frm);
     },
 
     custom_rov_sales_person(frm) {
@@ -57,4 +64,11 @@ function set_party_query(frm) {
             }
         };
     });
+}
+
+function toggle_sales_person(frm) {
+    frm.toggle_display(
+        "custom_rov_sales_person",
+        frm.doc.party_type === "Customer"
+    );
 }

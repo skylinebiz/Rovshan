@@ -1,32 +1,12 @@
 frappe.ui.form.on("Sales Invoice", {
     setup(frm) {
-        frm.set_query("customer", () => {
-            if (!frm.doc.custom_rov_sales_person) {
-                return {};
-            }
-
-            return {
-                filters: {
-                    custom_rov_main_sales_team_person: frm.doc.custom_rov_sales_person
-                }
-            };
-        });
+        set_party_query(frm);
     },
 
     custom_rov_sales_person(frm) {
         frm.set_value("customer", "");
 
-        frm.set_query("customer", () => {
-            if (!frm.doc.custom_rov_sales_person) {
-                return {};
-            }
-
-            return {
-                filters: {
-                    custom_rov_main_sales_team_person: frm.doc.custom_rov_sales_person
-                }
-            };
-        });
+        set_party_query(frm);
     },
 
     customer(frm) {
@@ -48,3 +28,17 @@ frappe.ui.form.on("Sales Invoice", {
         });
     },
 });
+
+function set_party_query(frm) {
+    frm.set_query("customer", () => {
+        if (!frm.doc.custom_rov_sales_person) {
+            return {};
+        }
+
+        return {
+            filters: {
+                custom_rov_main_sales_team_person: frm.doc.custom_rov_sales_person
+            }
+        };
+    });
+}
